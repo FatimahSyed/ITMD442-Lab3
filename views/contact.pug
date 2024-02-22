@@ -1,0 +1,61 @@
+extends layout
+
+block content
+  style.
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #f0f4f8;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .text-center {
+      text-align: center;
+      color: #333;
+    }
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+    th, td {
+      text-align: left;
+      padding: 8px;
+      color: #333;
+    }
+    th {
+      background-color: #e8eef1;
+    }
+    .btn {
+      display: inline-block;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 15px;
+      text-decoration: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    .mb-20 {
+      margin-bottom: 20px;
+    }
+
+  .container
+    h1.text-center #{contact.firstName + ' ' + contact.lastName}
+    table
+      tr
+        th Email:
+        th Notes:
+        th Created:
+        th Last Edited:
+      tr
+        td #{contact.email}
+        td #{contact.notes ? contact.notes : 'No notes available'}
+        td #{contact.createdFormatted}
+        td #{contact.lastEditedFormatted}
+    .contact-actions(style="margin-top: 20px; text-align: center;")
+      a(href=`/contacts/${contact.id}/edit`, class="btn mb-20") Edit
+      br
+      form(method='POST', action=`/contacts/${contact.id}?_method=DELETE`, style='display: inline;')
+        button(type='submit', class="btn mb-20", style="background-color: #dc3545;") Delete
