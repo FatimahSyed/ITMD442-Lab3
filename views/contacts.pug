@@ -1,0 +1,73 @@
+extends layout
+
+block content
+  style.
+    .contacts-container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #f0f4f8;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+    .contacts-table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #e8eef1;
+      color: #333;
+    }
+    .btn {
+      display: inline-block;
+      background-color: #007bff;
+      color: white;
+      padding: 5px 10px;
+      text-decoration: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .btn.mb-20 {
+      margin-bottom: 20px;
+    }
+    .btn.delete {
+      background-color: #dc3545;
+    }
+    form {
+      display: inline;
+    }
+
+  div.contacts-container
+    h1 Contacts
+    table.contacts-table
+      thead
+        tr
+          th First Name
+          th Last Name
+          th Email Address
+          th Actions
+      tbody
+        each contact in contacts
+          tr
+            td= contact.firstName
+            td= contact.lastName
+            td= contact.email
+            td
+              a(href=`/contacts/${contact.id}`, class="btn mb-20") View
+              br
+              a(href=`/contacts/${contact.id}/edit`, class="btn mb-20") Edit
+              form(method='POST', action=`/contacts/${contact.id}?_method=DELETE`)
+                button(type='submit', class="btn mb-20 delete") Delete
+  br
+  a(href='/contacts/new', class="btn mb-20") Add Contact
