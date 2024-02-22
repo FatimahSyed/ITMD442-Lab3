@@ -1,0 +1,52 @@
+extends layout
+
+block content
+  style.
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    form {
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #f0f4f8;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+      color: #333;
+    }
+    input[type='text'],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    button[type='submit'] {
+      display: inline-block;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+  h1 Add New Contact
+  form(method='POST', action='/contacts')
+    label First Name: 
+    input(type='text', name='firstName', required)
+    label Last Name: 
+    input(type='text', name='lastName', required)
+    label Email Address: 
+    input(type='text', name='email')
+    label Notes: 
+    textarea(name='notes')
+    button(type='submit') Add Contact
