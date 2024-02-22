@@ -1,0 +1,62 @@
+extends layout
+
+block content
+  style.
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    form {
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #f0f4f8;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+      color: #333;
+    }
+    input[type='text'],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      box-sizing: border-box;
+    }
+    button[type='submit'] {
+      display: inline-block;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .btn-cancel {
+      background-color: #6c757d;
+      text-decoration: none;
+      padding: 10px 15px;
+      color: white;
+      border-radius: 5px;
+      display: inline-block;
+      margin-left: 10px;
+    }
+
+  h1 Edit Contact
+  form(method='POST', action=`/contacts/${contact.id}?_method=PUT`)
+    label First Name: 
+    input(type='text', name='firstName', value=contact.firstName, required)
+    label Last Name: 
+    input(type='text', name='lastName', value=contact.lastName, required)
+    label Email Address: 
+    input(type='text', name='email', value=contact.email)
+    label Notes: 
+    textarea(name='notes')= contact.notes
+    button(type='submit') Save
+    a(href='/contacts', class='btn-cancel') Cancel

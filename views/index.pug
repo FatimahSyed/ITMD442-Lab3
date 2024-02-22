@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  style.
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-top: 20px;
+    }
+    p {
+      text-align: center;
+      color: #666;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    .view-link {
+      display: inline-block;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 15px;
+      text-decoration: none;
+      border-radius: 5px;
+      text-align: center;
+      margin: 20px auto;
+      display: block;
+      width: fit-content;
+    }
+
+  h1 Contact Database
+  p CREATE, VIEW, EDIT, and DELETE.
+  a(href='/contacts', class='view-link') View Contacts Database
