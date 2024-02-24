@@ -1,8 +1,8 @@
 # ITMD442-Lab2
 
-Name: Fatimah Syed
-Email: fsyed8@hawk.iit.edu
-Github Repo: https://github.com/FatimahSyed27/ITMD442-Lab2.git
+- Name: Fatimah Syed
+- Email: fsyed8@hawk.iit.edu
+- Github Repo: https://github.com/FatimahSyed27/ITMD442-Lab2.git
 
 ## Project Description:
 
@@ -10,9 +10,9 @@ This project involves the implementation of a Node.js Express application to pra
 
 ## Development Environment:
 
-Computer: MacOS Apple M1
-Node.js Version: v18.7.0
-Editor: Visual Studio Code/Github
+- Computer: MacOS Apple M1
+- Node.js Version: v18.7.0
+- Editor: Visual Studio Code/Github
 
 ## Installation/Running Instructions:
 
@@ -24,5 +24,5 @@ Editor: Visual Studio Code/Github
 
 ## Insights & Results:
 
-Transitioning to Pug's concise and indentation-based syntax initially posed a learning curve. However, after gaining a little familiarity, the use of Pug helped with automatic escaping of output text. Overall, this lab provided valuable hands-on experience in building a functional Node.js Express application with CRUD operations.
+Transitioning to Pug's concise and indentation-based syntax initially posed a learning curve. However, after gaining a little familiarity, the use of Pug helped with automatic escaping of output texts. Overall, this lab provided valuable hands-on experience in building a functional Node.js Express application with CRUD operations.
 
