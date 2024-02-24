@@ -1,41 +1,71 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const fs = require('fs');
+const path = require('path');
+const { v4: uuidv4 } = require('uuid');
+const methodOverride = require('method-override');
 
-var indexRouter = require('./mycontactdb/routes/index');
-var usersRouter = require('./mycontactdb/routes/users');
+const app = express();
+const contactsPath = path.join(__dirname, 'contacts.json');
 
-var app = express();
+// Middleware setup
+app.use(express.json(), express.urlencoded({ extended: false }), methodOverride('_method'), express.static(path.join(__dirname, 'public')))
+   .set('views', path.join(__dirname, 'views')).set('view engine', 'pug');
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+// Helper functions for reading and writing contacts
+const readContacts = () => {
+  try {
+    return JSON.parse(fs.readFileSync(contactsPath, 'utf8'));
+  } catch (err) {
+    if (err.code === 'ENOENT') console.log('Contacts file does not exist, initializing with an empty array.');
+    else throw err;
+    return [];
+  }
+};
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+const writeContacts = (contacts) => fs.writeFileSync(contactsPath, JSON.stringify(contacts, null, 2));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// Route handlers
+app.get('/', (req, res) => res.render('index'));
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+app.route('/contacts')
+  .get((req, res) => res.render('contacts', { contacts: readContacts() }))
+  .post((req, res) => {
+    const contacts = readContacts();
+    contacts.push({ id: uuidv4(), ...req.body, created: new Date().toISOString(), lastEdited: new Date().toISOString() });
+    writeContacts(contacts);
+    res.redirect(`/contacts/${contacts[contacts.length - 1].id}`);
+  });
+
+app.get('/contacts/new', (req, res) => res.render('new'));
+
+app.route('/contacts/:id')
+  .get((req, res) => {
+    const contact = readContacts().find(c => c.id === req.params.id);
+    if (!contact) return res.status(404).send('Contact not found');
+    res.render('contact', { contact, createdFormatted: new Date(contact.created).toLocaleString(), lastEditedFormatted: new Date(contact.lastEdited).toLocaleString() });
+  })
+  .put((req, res) => {
+    let contacts = readContacts();
+    const index = contacts.findIndex(c => c.id === req.params.id);
+    if (index !== -1) {
+      contacts[index] = { ...contacts[index], ...req.body, lastEdited: new Date().toISOString() };
+      writeContacts(contacts);
+    }
+    res.redirect(`/contacts/${req.params.id}`);
+  });
+
+app.get('/contacts/:id/edit', (req, res) => {
+    const contact = readContacts().find(c => c.id === req.params.id);
+    if (contact) res.render('editContact', { contact });
+    else res.status(404).send('Contact not found');
+  });
+
+app.delete('/contacts/:id', (req, res) => {
+  const contacts = readContacts().filter(c => c.id !== req.params.id);
+  writeContacts(contacts);
+  res.redirect('/contacts');
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use((err, req, res, next) => res.status(500).send(`Something broke! Error: ${err.message}`));
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
-
-module.exports = app;
+app.listen(3000, () => console.log('Server started on port 3000'));
