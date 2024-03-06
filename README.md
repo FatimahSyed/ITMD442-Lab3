@@ -25,4 +25,3 @@ This project involves the implementation of a Node.js Express application to pra
 ## Insights & Results:
 
 Transitioning to Pug's concise and indentation-based syntax initially posed a learning curve. However, after gaining a little familiarity, the use of Pug helped with automatic escaping of output texts. Overall, this lab provided valuable hands-on experience in building a functional Node.js Express application with CRUD operations.
-
