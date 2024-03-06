@@ -1,8 +1,8 @@
-# ITMD442-Lab2
+# ITMD442-Lab3
 
 - Name: Fatimah Syed
 - Email: fsyed8@hawk.iit.edu
-- Github Repo: https://github.com/FatimahSyed27/ITMD442-Lab2.git
+- Github Repo: https://github.com/FatimahSyed/ITMD442-Lab3.git
 
 ## Project Description:
 
