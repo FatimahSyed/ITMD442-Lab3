@@ -2,7 +2,7 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 // Define the database file path
-const dbFilePath = path.join(__dirname, 'data', 'my_personal_contacts.db');
+const dbFilePath = path.join(__dirname, 'data', 'contacts.db');
 
 // Establish a connection to the personal contacts database
 let personalContactsDB = new sqlite3.Database(dbFilePath, sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
