@@ -17,7 +17,7 @@ This project involves the implementation of a Node.js Express application to pra
 ## Installation/Running Instructions:
 
 1. Clone the github repository 
-2. Go into the project directory (cd ITMD442-Lab2)
+2. Go into the project directory (cd ITMD442-Lab3)
 3. Run "npm install" to install dependencies
 4. Initiate the application by running the command "npm start"
 5. Open your browser and go to http://localhost:3000/
